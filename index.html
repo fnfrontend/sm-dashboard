@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/images/logo.png" type="image/x-icon">
+    <title>School Management</title>
+    <!-- style sheet -->
+    <link rel="stylesheet" href="./style.css">
+    <!-- fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;800&display=swap" rel="stylesheet">
+    <!-- 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" 
+    rel="stylesheet">-->
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <!-- tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- chart js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkBlue: '#111A26',
+                        darkGreen: '#36D97D',
+                        mediumGreen: '#71D99E',
+                        lightGreen: '#B6F2D0',
+                        ofWhite: '#F2F3F7',
+                        myRed: '#FA3E3E',
+                        white: '#fff',
+                        dimWhite: '#5d6064',
+                        jsYellow: '#FFFF00',
+                        lgtGray: '#d3d3d3cf',
+                        blurBlue: '#0e1f36',
+                        newGray: '#aab1bd'
+                    },
+                    screens: {
+                        'sm': '540px',
+                        'md': '768px',
+                        'lg': '1024px',
+                        'xl': '1280px',
+                        '2xl': '1440px',
+                        '3xl': '1536px',
+                    },
+                },
+                fontFamily: {
+                    'OpenSans': ['"Inter"', 'sans-serif'],
+                },
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!-- main wrapper -->
+    <div id="main-wrapper" class="bg-darkBlue relative h-screen overflow-x-hidden">
+        <!-- navigation bar -->
+        <div
+            class="max-w-[1920px] w-full mx-auto md:border-0 border-b-[1.5px] border-dimWhite flex flex-row h-[75px] lg:px-[20px] px-[15px] items-center">
+            <div class="w-[160px] 2xl:mr-[50px] mr-[25px]">
+                <img class="w-full h-full" src="./assets/images/logo.png" alt="logo">
+            </div>
+            <div class="flex flex-1 flex-row justify-between items-center h-full relative">
+                <div class="2xl:flex hidden main-navigtion flex-row items-center ml-[20px] relative">
+                    <span class="absolute left-[-20px] h-[20px] w-[1px] bg-ofWhite"></span>
+                    <a href="#" class="nagvi-active relative active mx-[15px] h-full flex items-center">
+                        <p class="text-ofWhite font-OpenSans hover:text-mediumGreen">Dashboard </p>
+                    </a>
+                    <a href="#" class="nagvi-active relative  mx-[15px] h-full flex items-center">
+                        <p class="text-ofWhite font-OpenSans hover:text-mediumGreen">Manage Attendance</p>
+                    </a>
+                    <a href="#" class="nagvi-active relative  mx-[15px] h-full flex items-center">
+                        <p class="text-ofWhite font-OpenSans hover:text-mediumGreen">Register Attendance</p>
+                    </a>
+                    <a href="#" class="nagvi-active relative  mx-[15px] h-full flex items-center">
+                        <p class="text-ofWhite font-OpenSans hover:text-mediumGreen">Reports</p>
+                    </a>
+                </div>
+                <div class="open-side-menu 2xl:hidden flex main-navigtion flex-row items-center relative">
+                    <svg class="fill-ofWhite md:w-[30px] w-[18px]" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24">
+                        <path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"></path>
+                    </svg>
+                </div>
+                <div class="flex flex-row items-center">
+                    <div class="2xl:flex hidden relative bg-white rounded-[8px] py-[7px] px-[10px]">
+                        <svg class="fill-dimWhite w-[20px] mr-[5px] " xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z">
+                            </path>
+                        </svg>
+                        <input class="bg-transparent border-0 outline-none font-OpenSans" type="text" name="" id=""
+                            placeholder="Search...">
+                    </div>
+                    <div class="relative px-[7px] md:px-[20px] mx-[20px] border-l border-r border-dimWhite">
+                        <svg class="open-notification cursor-pointer fill-dimWhite w-[20px]"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path
+                                d="M18 10C18 6.68629 15.3137 4 12 4C8.68629 4 6 6.68629 6 10V18H18V10ZM20 18.6667L20.4 19.2C20.5657 19.4209 20.5209 19.7343 20.3 19.9C20.2135 19.9649 20.1082 20 20 20H4C3.72386 20 3.5 19.7761 3.5 19.5C3.5 19.3918 3.53509 19.2865 3.6 19.2L4 18.6667V10C4 5.58172 7.58172 2 12 2C16.4183 2 20 5.58172 20 10V18.6667ZM9.5 21H14.5C14.5 22.3807 13.3807 23.5 12 23.5C10.6193 23.5 9.5 22.3807 9.5 21Z">
+                            </path>
+                        </svg>
+                        <span
+                            class="absolute top-0 md:right-[21px] right-[9px] bg-myRed w-[7px] h-[7px] rounded-full"></span>
+                        <ul
+                            class="my-custom-scroll for-toggle-notification absolute w-[230px] h-[315px] bg-white rounded-[5px] top-[40px] right-0 z-[10] overflow-y-auto">
+                            <li class="close-notifi p-[10px] hover:bg-ofWhite cursor-pointer">
+                                <a href="#">
+                                    <p class="font-OpenSans text-[15px] font-[500]">This is test notification test
+                                        notification</p>
+                                </a>
+                            </li>
+                            <li class="close-notifi p-[10px] hover:bg-ofWhite cursor-pointer">
+                                <a href="#">
+                                    <p class="font-OpenSans text-[15px] font-[500]">This is test notification</p>
+                                </a>
+                            </li>
+                            <li class="close-notifi p-[10px] hover:bg-ofWhite cursor-pointer">
+                                <a href="#">
+                                    <p class="font-OpenSans text-[15px] font-[500]">This is test notification</p>
+                                </a>
+                            </li>
+                            <li class="close-notifi p-[10px] hover:bg-ofWhite cursor-pointer">
+                                <a href="#">
+                                    <p class="font-OpenSans text-[15px] font-[500]">This is test notification</p>
+                                </a>
+                            </li>
+                            <li class="close-notifi p-[10px] hover:bg-ofWhite cursor-pointer">
+                                <a href="#">
+                                    <p class="font-OpenSans text-[15px] font-[500]">This is test notification</p>
+                                </a>
+                            </li>
+                            <li class="close-notifi p-[10px] hover:bg-ofWhite cursor-pointer">
+                                <a href="#">
+                                    <p class="font-OpenSans text-[15px] font-[500]">This is test notification</p>
+                                </a>
+                            </li>
+                            <li class="close-notifi p-[10px] hover:bg-ofWhite cursor-pointer">
+                                <a href="#">
+                                    <p class="font-OpenSans text-[15px] font-[500]">This is test notification</p>
+                                </a>
+                            </li>
+                            <li class="close-notifi p-[10px] hover:bg-ofWhite cursor-pointer">
+                                <a href="#">
+                                    <p class="font-OpenSans text-[15px] font-[500]">This is test notification</p>
+                                </a>
+                            </li>
+                            <li class="close-notifi p-[10px] hover:bg-ofWhite cursor-pointer">
+                                <a href="#">
+                                    <p class="font-OpenSans text-[15px] font-[500]">This is test notification</p>
+                                </a>
+                            </li>
+                            <li class="close-notifi p-[10px] hover:bg-ofWhite cursor-pointer">
+                                <a href="#">
+                                    <p class="font-OpenSans text-[15px] font-[500]">This is test notification</p>
+                                </a>
+                            </li>
+                            <li class="close-notifi p-[10px] hover:bg-ofWhite cursor-pointer">
+                                <a href="#">
+                                    <p class="font-OpenSans text-[15px] font-[500]">This is test notification</p>
+                                </a>
+                            </li>
+                            <li class="close-notifi p-[10px] hover:bg-ofWhite cursor-pointer">
+                                <a href="#">
+                                    <p class="font-OpenSans text-[15px] font-[500]">This is test notification</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="md:block hidden pr-[20px] mr-[20px] border-r border-dimWhite">
+                        <svg class=" cursor-pointer fill-dimWhite w-[20px]" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M2.21329 14.0601C1.92026 12.6755 1.93213 11.2743 2.21413 9.94038C3.32405 10.0711 4.29284 9.7035 4.60963 8.93871C4.92641 8.17392 4.50129 7.22896 3.62405 6.53655C4.36788 5.3939 5.35029 4.39471 6.53651 3.62289C7.22898 4.50059 8.17422 4.92601 8.9392 4.60914C9.70418 4.29227 10.0717 3.32308 9.94077 2.21281C11.3253 1.91977 12.7265 1.93164 14.0605 2.21364C13.9298 3.32356 14.2973 4.29235 15.0621 4.60914C15.8269 4.92593 16.7719 4.5008 17.4643 3.62356C18.6069 4.36739 19.6061 5.3498 20.3779 6.53602C19.5002 7.22849 19.0748 8.17373 19.3917 8.93871C19.7086 9.70369 20.6778 10.0713 21.788 9.94028C22.0811 11.3248 22.0692 12.726 21.7872 14.06C20.6773 13.9293 19.7085 14.2969 19.3917 15.0616C19.0749 15.8264 19.5 16.7714 20.3773 17.4638C19.6335 18.6064 18.651 19.6056 17.4648 20.3775C16.7724 19.4998 15.8271 19.0743 15.0621 19.3912C14.2971 19.7081 13.9296 20.6773 14.0606 21.7875C12.676 22.0806 11.2748 22.0687 9.94087 21.7867C10.0716 20.6768 9.70399 19.708 8.9392 19.3912C8.17441 19.0744 7.22945 19.4995 6.53703 20.3768C5.39439 19.633 4.3952 18.6506 3.62338 17.4643C4.50108 16.7719 4.92649 15.8266 4.60963 15.0616C4.29276 14.2967 3.32356 13.9291 2.21329 14.0601ZM4.00073 12.2104C5.10054 12.5148 6.00815 13.2117 6.45739 14.2963C6.90662 15.3808 6.75764 16.5154 6.19519 17.5083C6.29175 17.61 6.39096 17.7092 6.4927 17.8056C7.48558 17.2432 8.6201 17.0943 9.70456 17.5435C10.789 17.9927 11.4859 18.9002 11.7904 19.9999C11.9305 20.0037 12.0707 20.0038 12.2109 20.0001C12.5153 18.9003 13.2122 17.9927 14.2968 17.5435C15.3813 17.0942 16.5159 17.2432 17.5088 17.8057C17.6105 17.7091 17.7096 17.6099 17.806 17.5081C17.2437 16.5153 17.0947 15.3807 17.5439 14.2963C17.9931 13.2118 18.9007 12.5149 20.0004 12.2105C20.0042 12.0704 20.0043 11.9301 20.0006 11.7899C18.9008 11.4856 17.9932 10.7886 17.5439 9.70407C17.0947 8.61953 17.2437 7.48494 17.8061 6.49204C17.7096 6.39031 17.6104 6.2912 17.5086 6.19479C16.5158 6.75717 15.3812 6.9061 14.2968 6.4569C13.2123 6.0077 12.5154 5.10016 12.211 4.00044C12.0709 3.99666 11.9306 3.99659 11.7904 4.00024C11.486 5.10005 10.7891 6.00767 9.70456 6.4569C8.62002 6.90613 7.48543 6.75715 6.49252 6.1947C6.39079 6.29126 6.29169 6.39047 6.19528 6.49222C6.75766 7.48509 6.90659 8.61961 6.45739 9.70407C6.00819 10.7885 5.10065 11.4855 4.00092 11.7899C3.99715 11.93 3.99708 12.0702 4.00073 12.2104ZM12.0007 15.0002C10.3438 15.0002 9.00066 13.657 9.00066 12.0002C9.00066 10.3433 10.3438 9.00018 12.0007 9.00018C13.6575 9.00018 15.0007 10.3433 15.0007 12.0002C15.0007 13.657 13.6575 15.0002 12.0007 15.0002ZM12.0007 13.0002C12.5529 13.0002 13.0007 12.5525 13.0007 12.0002C13.0007 11.4479 12.5529 11.0002 12.0007 11.0002C11.4484 11.0002 11.0007 11.4479 11.0007 12.0002C11.0007 12.5525 11.4484 13.0002 12.0007 13.0002Z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="profile-main flex flex-row items-center cursor-pointer relative">
+                        <div class="w-[35px] h-[35px] relative">
+                            <img class="rounded-full w-full h-full object-cover" src="./assets/images/profile-3.jpg"
+                                alt="profile Image">
+                            <span class="absolute rounded-full bg-darkGreen w-[10px] h-[10px] bottom-0 right-0"></span>
+                        </div>
+                        <p class="md:block hidden text-white font-OpenSans ml-[10px] mr-[5px] font-[500] text-[14px]">
+                            Ali Flories
+                        </p>
+                        <div class="relative">
+                            <svg class="fill-white w-[25px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div
+                            class="profile-pro absolute w-[190px] bg-white rounded-[5px] top-[50px] right-0 z-[10] overflow-y-auto">
+                            <a class="flex flex-row p-[10px]  hover:bg-ofWhite cursor-pointer" href="#">
+                                <svg class="fill-darkBlue w-[20px] mr-[6px]" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H18C18 18.6863 15.3137 16 12 16C8.68629 16 6 18.6863 6 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11Z">
+                                    </path>
+                                </svg>
+                                <p class="font-OpenSans text-darkBlue text-[15px] font-[500]">My Profile</p>
+                            </a>
+                            <a class="flex flex-row p-[10px]  hover:bg-ofWhite cursor-pointer" href="#">
+                                <svg class="fill-darkBlue w-[20px] mr-[6px]" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M3.33946 17.0002C2.90721 16.2515 2.58277 15.4702 2.36133 14.6741C3.3338 14.1779 3.99972 13.1668 3.99972 12.0002C3.99972 10.8345 3.3348 9.824 2.36353 9.32741C2.81025 7.71651 3.65857 6.21627 4.86474 4.99001C5.7807 5.58416 6.98935 5.65534 7.99972 5.072C9.01009 4.48866 9.55277 3.40635 9.4962 2.31604C11.1613 1.8846 12.8847 1.90004 14.5031 2.31862C14.4475 3.40806 14.9901 4.48912 15.9997 5.072C17.0101 5.65532 18.2187 5.58416 19.1346 4.99007C19.7133 5.57986 20.2277 6.25151 20.66 7.00021C21.0922 7.7489 21.4167 8.53025 21.6381 9.32628C20.6656 9.82247 19.9997 10.8336 19.9997 12.0002C19.9997 13.166 20.6646 14.1764 21.6359 14.673C21.1892 16.2839 20.3409 17.7841 19.1347 19.0104C18.2187 18.4163 17.0101 18.3451 15.9997 18.9284C14.9893 19.5117 14.4467 20.5941 14.5032 21.6844C12.8382 22.1158 11.1148 22.1004 9.49633 21.6818C9.55191 20.5923 9.00929 19.5113 7.99972 18.9284C6.98938 18.3451 5.78079 18.4162 4.86484 19.0103C4.28617 18.4205 3.77172 17.7489 3.33946 17.0002ZM8.99972 17.1964C10.0911 17.8265 10.8749 18.8227 11.2503 19.9659C11.7486 20.0133 12.2502 20.014 12.7486 19.9675C13.1238 18.8237 13.9078 17.8268 14.9997 17.1964C16.0916 16.5659 17.347 16.3855 18.5252 16.6324C18.8146 16.224 19.0648 15.7892 19.2729 15.334C18.4706 14.4373 17.9997 13.2604 17.9997 12.0002C17.9997 10.74 18.4706 9.5632 19.2729 8.6665C19.1688 8.4405 19.0538 8.21822 18.9279 8.00021C18.802 7.78219 18.667 7.57148 18.5233 7.36842C17.3457 7.61476 16.0911 7.43414 14.9997 6.80405C13.9083 6.17395 13.1246 5.17768 12.7491 4.03455C12.2509 3.98714 11.7492 3.98646 11.2509 4.03292C10.8756 5.17671 10.0916 6.17364 8.99972 6.80405C7.9078 7.43447 6.65245 7.61494 5.47428 7.36803C5.18485 7.77641 4.93463 8.21117 4.72656 8.66637C5.52881 9.56311 5.99972 10.74 5.99972 12.0002C5.99972 13.2604 5.52883 14.4372 4.72656 15.3339C4.83067 15.5599 4.94564 15.7822 5.07152 16.0002C5.19739 16.2182 5.3324 16.4289 5.47612 16.632C6.65377 16.3857 7.90838 16.5663 8.99972 17.1964ZM11.9997 15.0002C10.3429 15.0002 8.99972 13.6571 8.99972 12.0002C8.99972 10.3434 10.3429 9.00021 11.9997 9.00021C13.6566 9.00021 14.9997 10.3434 14.9997 12.0002C14.9997 13.6571 13.6566 15.0002 11.9997 15.0002ZM11.9997 13.0002C12.552 13.0002 12.9997 12.5525 12.9997 12.0002C12.9997 11.4479 12.552 11.0002 11.9997 11.0002C11.4474 11.0002 10.9997 11.4479 10.9997 12.0002C10.9997 12.5525 11.4474 13.0002 11.9997 13.0002Z">
+                                    </path>
+                                </svg>
+                                <p class="font-OpenSans text-darkBlue text-[15px] font-[500]">Settings</p>
+                            </a>
+                            <a class="flex flex-row p-[10px]  hover:bg-ofWhite cursor-pointer" href="#">
+                                <svg class="fill-darkBlue w-[20px] mr-[6px]" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M5.76282 17H20V5H4V18.3851L5.76282 17ZM6.45455 19L2 22.5V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V18C22 18.5523 21.5523 19 21 19H6.45455Z">
+                                    </path>
+                                </svg>
+                                <p class="font-OpenSans text-darkBlue text-[15px] font-[500]">Chat</p>
+                            </a>
+                            <a class="flex flex-row p-[10px]  hover:bg-ofWhite cursor-pointer" href="#">
+                                <svg class="fill-darkBlue w-[20px] mr-[6px]" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M5 22C4.44772 22 4 21.5523 4 21V3C4 2.44772 4.44772 2 5 2H19C19.5523 2 20 2.44772 20 3V6H18V4H6V20H18V18H20V21C20 21.5523 19.5523 22 19 22H5ZM18 16V13H11V11H18V8L23 12L18 16Z">
+                                    </path>
+                                </svg>
+                                <p class="font-OpenSans text-darkBlue text-[15px] font-[500]">Log Out</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <span class="md:block hidden absolute bg-dimWhite left-0 h-[1.5px] w-screen bottom-0"></span>
+            </div>
+            <!-- sidebar -->
+            <div class="side-menu-bar absolute h-full bg-darkBlue 2xl:hidden block">
+                <div class="w-[160px] 2xl:mr-[50px] mr-[25px] mb-[27px]">
+                    <img class="w-full h-full" src="./assets/images/logo.png" alt="logo">
+                </div>
+                <div class="my-close-btn fixed bg-ofWhite p-[10px] rounded-[8px] right-[20px] top-[20px] z-[20]">
+                    <svg class="fill-darkBlue w-[25px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M12.0007 10.5865L16.9504 5.63672L18.3646 7.05093L13.4149 12.0007L18.3646 16.9504L16.9504 18.3646L12.0007 13.4149L7.05093 18.3646L5.63672 16.9504L10.5865 12.0007L5.63672 7.05093L7.05093 5.63672L12.0007 10.5865Z">
+                        </path>
+                    </svg>
+                </div>
+                <div class="flex relative bg-white rounded-[8px] py-[7px] px-[10px] mb-[20px]">
+                    <svg class="fill-dimWhite w-[20px] mr-[5px] " xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24">
+                        <path
+                            d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z">
+                        </path>
+                    </svg>
+                    <input class="bg-transparent border-0 outline-none font-OpenSans" type="text" name="" id=""
+                        placeholder="Search...">
+                </div>
+                <div class="flex main-navigtion flex-col relative z-[10]">
+                    <a href="#" class="nagvi-active py-[15px] relative active flex items-center">
+                        <p class="text-ofWhite font-OpenSans hover:text-mediumGreen">Dashboard </p>
+                    </a>
+                    <a href="#" class="nagvi-active py-[15px] relative  flex items-center">
+                        <p class="text-ofWhite font-OpenSans hover:text-mediumGreen">Manage Attendance</p>
+                    </a>
+                    <a href="#" class="nagvi-active py-[15px] relative  flex items-center">
+                        <p class="text-ofWhite font-OpenSans hover:text-mediumGreen">Register Attendance</p>
+                    </a>
+                    <a href="#" class="nagvi-active py-[15px] relative  flex items-center">
+                        <p class="text-ofWhite font-OpenSans hover:text-mediumGreen">Reports</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Profile section -->
+        <div
+            class="2xl:px-[15px] max-w-[1440px] w-full 2xl:px-0 px-[15px] mx-auto md:mt-[80px] mt-[40px] flex lg:flex-row flex-col justify-between lg:items-center">
+            <div class="flex flex-row items-center 2xl:mb-0 mb-[25px]">
+                <img class="object-cover md:w-[65px] md:h-[65px] w-[50px] h-[50px] rounded-full"
+                    src="./assets/images/profile-3.jpg" alt="profile">
+                <div class="ml-[15px]">
+                    <div class="flex flex-row items-center">
+                        <p class="text-white md:text-[22px] text-[18px] font-OpenSans font-[600]">
+                            Hello Ali!
+                        </p>
+                        <svg class="fill-jsYellow md:w-[20px] w-[15px] ml-[10px] mt-[-4px] md:mt-[-10px]" id="Layer_1"
+                            data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 109.22 122.88">
+                            <defs>
+                                <style>
+                                    .cls-1 {
+                                        fill-rule: evenodd;
+                                    }
+                                </style>
+                            </defs>
+                            <title>hand-wave</title>
+                            <path class="cls-1"
+                                d="M41.83,97.57c0-.13,0-.26,0-.38a17,17,0,0,1,4.31-11.57L32.39,71.88a5.76,5.76,0,0,0-8.13,0h0a5.76,5.76,0,0,0,0,8.12L41.83,97.57Zm-8.13,11.5a4.08,4.08,0,1,1-2.27,7.84,47.87,47.87,0,0,1-19.92-11A44.75,44.75,0,0,1,.23,88.11a4.09,4.09,0,0,1,7.71-2.72A36.71,36.71,0,0,0,17.14,100a39.73,39.73,0,0,0,16.56,9.12ZM63.88,22.38A4.08,4.08,0,1,1,67.36,15a44.74,44.74,0,0,1,10.19,6.55,41.61,41.61,0,0,1,7.63,8.63,4.09,4.09,0,1,1-6.82,4.51,33.56,33.56,0,0,0-6.12-6.93,36.66,36.66,0,0,0-8.36-5.37ZM68.05,8A4.08,4.08,0,1,1,70.32.16a48,48,0,0,1,19.93,11A44.84,44.84,0,0,1,101.52,29a4.09,4.09,0,0,1-7.71,2.72,36.71,36.71,0,0,0-9.2-14.56A39.73,39.73,0,0,0,68.05,8ZM92.51,71.35A29.16,29.16,0,0,0,84,76.83a14.41,14.41,0,0,0-4.16,6.78,11,11,0,0,0,.56,7A16.51,16.51,0,0,0,84,95.8L82,97.65C71.69,86.59,77.13,76,90.11,69.4l-3.85-3.66a12.25,12.25,0,0,0-1-.9,1.85,1.85,0,0,1-.56-.32,11.5,11.5,0,0,0-7.35-1.74,11.34,11.34,0,0,0-7,3.28l-.75.75-.06,0,0,0L48.89,87.56a1.83,1.83,0,0,1-.54.38l-.37.38a11.37,11.37,0,0,0-3.28,6.89,12,12,0,0,0,.21,3.73,11.77,11.77,0,0,0,3,5.12l12.42,12.42a21.7,21.7,0,0,0,15.24,6.4,21.06,21.06,0,0,0,15.1-6.21l9.42-9.42a21.85,21.85,0,0,0,7.12-16.71v-.11h0v0l-.14-29.23a1.5,1.5,0,0,1,0-.3l2.13.13-2.12-.13c.28-4.55-1.33-7.49-3.47-8.8a5.16,5.16,0,0,0-2.47-.78,4.64,4.64,0,0,0-2.4.52c-1.89,1-3.32,3.33-3.32,7.16,0,.88,0,3.21-.06,5.42a27,27,0,0,1-.53,5.27,2.13,2.13,0,0,1-.58,1.08,2.1,2.1,0,0,1-1.76.62ZM47.89,83.61,56,75.48l-22-22A5.78,5.78,0,0,0,30,51.84a5.72,5.72,0,0,0-4.07,1.67h0a5.79,5.79,0,0,0,0,8.14l22,22Zm10.3-10.3,8.13-8.13-29-29a5.79,5.79,0,0,0-8.14,0h0a5.79,5.79,0,0,0,0,8.14l29,29Zm10.74-9.49a17.55,17.55,0,0,1,11.63-4.34h.28L55.14,33.77a5.77,5.77,0,0,0-8.13,0h0a5.77,5.77,0,0,0,0,8.13L68.92,63.83Z" />
+                        </svg>
+                    </div>
+                    <p class="text-lgtGray font-OpenSans md:text-[15px] text-[14px]">
+                        We hope you're having a great day.
+                    </p>
+                </div>
+            </div>
+            <div class="flex md:flex-row flex-col">
+                <div class="drop-down relative">
+                    <div
+                        class="select-drop-d class-selected-d cursor-pointer flex flex-row justify-between items-center bg-blurBlue py-[7px] px-[10px] min-w-[180px] w-full border rounded-[8px] border-dimWhite">
+                        <p class="text-white text-[13px] font-OpenSans font-[400]">
+                            All Classes
+                        </p>
+                        <svg class="fill-white w-[25px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path
+                                d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z">
+                            </path>
+                        </svg>
+                    </div>
+                    <ul
+                        class="my-new-classes absolute bg-white rounded-[8px] py-[10px] top-[45px] right-0 w-full z-[10]">
+                        <li
+                            class="close-classes-bs font-OpenSans text-[15px] cursor-pointer text-darkBlue hover:bg-ofWhite px-[10px] h-[25px]">
+                            All Classes</li>
+                        <li
+                            class="close-classes-bs font-OpenSans text-[15px] cursor-pointer text-darkBlue hover:bg-ofWhite px-[10px] h-[25px]">
+                            Primary Classes</li>
+                        <li
+                            class="close-classes-bs font-OpenSans text-[15px] cursor-pointer text-darkBlue hover:bg-ofWhite px-[10px] h-[25px]">
+                            Secondary Classes</li>
+                    </ul>
+                </div>
+                <div class="relative">
+                    <div
+                        class="my-dd-p cursor-pointer md:my-0 my-[20px] md:ml-[10px] select-drop-d cursor-pointer flex flex-row justify-between items-center bg-blurBlue py-[10px] px-[10px] min-w-[180px] w-full border rounded-[8px] border-dimWhite">
+                        <p class="text-white text-[13px] font-OpenSans font-[400]">
+                            Today
+                        </p>
+                        <svg class="fill-white w-[17px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path
+                                d="M9 1V3H15V1H17V3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9ZM20 11H4V19H20V11ZM7 5H4V9H20V5H17V7H15V5H9V7H7V5Z">
+                            </path>
+                        </svg>
+                    </div>
+                    <ul
+                        class="my-new-class absolute bg-white rounded-[8px] py-[10px] md:top-[45px] top-[65px] md:right-[-12px] w-full z-[10]">
+                        <li
+                            class="close-classes-bss font-OpenSans text-[15px] cursor-pointer text-darkBlue hover:bg-ofWhite px-[10px] h-[25px]">
+                            Today</li>
+                        <li
+                            class="close-classes-bss font-OpenSans text-[15px] cursor-pointer text-darkBlue hover:bg-ofWhite px-[10px] h-[25px]">
+                            15 days ago</li>
+                        <li
+                            class="close-classes-bss font-OpenSans text-[15px] cursor-pointer text-darkBlue hover:bg-ofWhite px-[10px] h-[25px]">
+                            30 days ago</li>
+                    </ul>
+                </div>
+                <div
+                    class="md:max-w-[90px] ml-auto md:ml-[15px] py-[7px] px-[10px] bg-mediumGreen cursor-pointer flex flex-row items-center rounded-[8px] ">
+                    <svg class="fill-white w-[25px] mr-[5px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M10 18H14V16H10V18ZM3 6V8H21V6H3ZM6 13H18V11H6V13Z"></path>
+                    </svg>
+                    <p class="font-OpenSans text-white text-[13px] font-[500]">
+                        Filter
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="my-bg-wht relative">
+            <!-- flash details -->
+            <div class="2xl:px-[15px] max-w-[1440px] w-full mx-auto 2xl:px-0 px-[15px] md:mt-[10px] mt-[30px]">
+                <p class="text-ofWhite font-OpenSans text-[18px] text-right">
+                    *Total Students 3020
+                </p>
+                <div class="flex flex-wrap justify-between 2xl:mx-[-15px]">
+                    <div class="2xl:mt-0 mt-[15px] mx-[10px] 2xl:w-[23%] lg:w-[47%] md:w-[47%] sm:w-[46%] w-full  ">
+                        <div
+                            class="cursor-pointer parent-container main-over-view relative bg-white flex flex-row items-center h-[145px] rounded-[8px] px-[20px]">
+                            <span class="open-dropd-card cursor-pointer">
+                                <svg class=" fill-dimWhite hover:fill-darkBlue absolute right-[13px] top-[4px] w-[35px] "
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10ZM19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z">
+                                    </path>
+                                </svg>
+                            </span>
+                            <div class="my-custom-scroll my-drop-d p-[10px]">
+                                <p
+                                    class="close-noft-man text-darkBlue cursor-pointer w-full text-[13px] font-[600] hover:bg-ofWhites font-OpenSans">
+                                    View Details
+                                </p>
+                            </div>
+                            <span class="bg-ofWhite py-[15px] px-[15px] rounded-[8px] mr-[20px]">
+                                <svg class="fill-mediumGreen w-[35px] h-[35px]" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M4 11.3333L0 9L12 2L24 9V17.5H22V10.1667L20 11.3333V18.0113L19.7774 18.2864C17.9457 20.5499 15.1418 22 12 22C8.85817 22 6.05429 20.5499 4.22263 18.2864L4 18.0113V11.3333ZM6 12.5V17.2917C7.46721 18.954 9.61112 20 12 20C14.3889 20 16.5328 18.954 18 17.2917V12.5L12 16L6 12.5ZM3.96927 9L12 13.6846L20.0307 9L12 4.31541L3.96927 9Z">
+                                    </path>
+                                </svg>
+                            </span>
+                            <div>
+                                <p class="text-darkBlue text-[28px] font-OpenSans font-[800]">
+                                    47
+                                </p>
+                                <p class="text-newGray text-[14px] font-OpenSans mt-[-3px] font-[500] uppercase  ">
+                                    Total Absence
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="2xl:mt-0 mt-[15px] mx-[10px] 2xl:w-[23%] lg:w-[47%] md:w-[47%] sm:w-[46%] w-full">
+                        <div
+                            class="cursor-pointer parent-container main-over-view relative bg-white flex flex-row items-center h-[145px] rounded-[8px] px-[20px]">
+                            <span class="open-dropd-card cursor-pointer">
+                                <svg class="cursor-pointer fill-dimWhite hover:fill-darkBlue absolute right-[13px] top-[4px] w-[35px] "
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10ZM19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z">
+                                    </path>
+                                </svg>
+                            </span>
+                            <div class="my-custom-scroll my-drop-d p-[10px]">
+                                <p
+                                    class="close-noft-man text-darkBlue cursor-pointer w-full text-[13px] font-[600] hover:bg-ofWhites font-OpenSans">
+                                    View Details
+                                </p>
+                            </div>
+                            <span class="bg-ofWhite py-[15px] px-[15px] rounded-[8px] mr-[20px]">
+                                <svg class="fill-mediumGreen w-[35px] h-[35px]" xmlns="http://www.w3.org/2000/svg"
+                                    shape-rendering="geometricPrecision" text-rendering="geometricPrecision"
+                                    image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd"
+                                    viewBox="0 0 512 291.31">
+                                    <path
+                                        d="M194.15 156.28c.86-3.66 2.44-4.73 4.24-5.07 4.93-.76 4.16 22.84-4.24 23.94v-18.87zm220.4-17.59c.99-4.13 2.76-5.33 4.79-5.72 5.58-.86 4.7 25.81-4.79 27.05v-21.33zm9.08-14.62c-.03.49-.05.98-.08 1.5l-4.02 2.52c12.86-.9 10.32 35.01-4.38 37.17-.35.05-.65.05-.96.02 0 1.83.05 3.55-.2 5.41-2.07 15.51-18.36 36.73-31.02 44.2-18.2 10.74-41.4 12.58-62.16-4.62-10.74-8.9-22.36-25.15-26.57-38.79-.93-3.03-.94-3.39-.94-6.2-11.11 2.26-16.31-22.16-12.48-31.95 2.4-6.09 8.42-6.99 12.48-2.32v-3.02l-3.02-1.7c-.36-2.45-.4-4.96-.26-7.48-2.76-4.62-3.51-8.56-2.64-11.9-1.22-1.66-1.97-3.45-2.13-5.39V66.68l53.94 16.48c5.1 1.11 10.29 1.68 15.57 1.67 4.93-.03 9.93-.56 15.02-1.67l56.47-16.31.93 34.36c-.34 3.23-1.24 5.98-2.68 8.25-.19.3-.42.6-.68.89 1.53 3.85 1.59 8.39-.19 13.72zm-98.75 82.41c24.88 18.58 52.96 10.78 71.37-13.11 6.56-8.52 10.91-18.2 11.93-26.95v-42.14c.58 0-.87-2.75-2.56-5.62-17.81 4.9-42.55 7.65-50.97 7.25-10.29-.49-35.56-2.98-52.61-9.54-1.64.99-2.75 2.55-3.24 4.86v46.12c3.12 15.01 14 30.1 26.08 39.13zm37.87-70.93c-.87 1.46-.62 2.99.77 3.76 2.75 1.55 6.27-.76 8.95-1.61 7.04-2.24 15.41-2.51 21.5 1.31 1.62 1.01 3.28 2.32 4.95 3.92-.62-2.22-1.59-4.25-3.01-6.06-5.35-6.82-17.96-7.97-26.47-5.26-2.08.66-5.54 2.07-6.69 3.94zm-19.35.43c.6 1.32.27 2.64-.97 3.33-2.77 1.55-6.27-.76-8.95-1.61-7.04-2.24-15.42-2.51-21.52 1.31-1.62 1.01-3.27 2.32-4.95 3.92.63-2.22 1.61-4.25 3.02-6.06 5.35-6.79 17.83-7.95 26.34-5.3 2.24.7 6.05 2.23 7.03 4.41zm-27.89 10.79c-.32-1.03.17-2.16 1.07-2.51 6.96-2.69 14.05-2.52 21.05 0 .9.35 1.41 1.45 1.13 2.49-.28 1.03-1.27 1.59-2.16 1.28-1.16-.41-2.32-.77-3.48-1.02a4.872 4.872 0 0 1-4.7 6.18c-2.68 0-4.88-2.19-4.88-4.87 0-.67.14-1.29.37-1.86-1.82.19-3.66.61-5.49 1.27-1.15.4-2.35.78-2.91-.96zm58.61 0c-.16.46-.24.97-.24 1.5 0 2.68 2.19 4.87 4.88 4.87a4.876 4.876 0 0 0 4.38-7.01c2.11.23 4.28.7 6.42 1.39.93.31 1.89-.3 2.14-1.37.26-1.05-.28-2.14-1.18-2.44-3.51-1.16-7.01-1.73-10.52-1.71-3.48 0-6.97.6-10.39 1.73-.94.31-1.45 1.39-1.2 2.42.26 1.03 1.25 1.66 2.15 1.35 1.1-.36 2.21-.66 3.31-.9.43-.08.35-.16.25.17zm-27.4 31.29c-.03-.56.13-1.12.52-1.59.81-.95 2.22-1.07 3.18-.28 2.32 1.95 4.3 1.91 6.62-.02.95-.8 2.38-.65 3.17.3.81.96.66 2.38-.3 3.18-3.62 2.99-7.68 3.36-11.56.63-.82-.58-1.56-1.11-1.63-2.22zm-7.45 14.7c-.48-1.95 1.61-3.65 3.41-2.67 7.22 3.82 14.2 4 21.41.03 2.76-1.48 4.98 2.63 2.29 4.15-8.07 4.47-16.53 4.59-24.81.56-.99-.48-1.99-.86-2.3-2.07zm-46.66-32.99v-21.08c-.99-4.13-2.77-5.33-4.81-5.72-5.44-.85-4.98 25.33 4.57 27.01.31.06.24.1.24-.21zm106.53 57.26c39.02 35.11 93.97-9.73 112.86 74.28H195.13c18.95-84.04 75.09-40.3 112.86-74.28 20.33 31.25 77.34 29.95 91.15 0zM450.07 42.1v41.99h1.33c.9 0 1.64.74 1.64 1.65v11.28c0 .9-.74 1.64-1.64 1.64h-1.33v3.96c1.68.31 2.97 1.81 2.97 3.58 0 2-1.64 3.64-3.64 3.64h-6.53a3.64 3.64 0 0 1-.66-7.22v-3.96h-1.33c-.9 0-1.64-.74-1.64-1.64V85.74c0-.91.74-1.65 1.64-1.65h1.33V44.55l-68.72 21.37c-12.45 2.96-24.89 3.16-37.34 0L260.3 43.28l-6.85-2.04c-8.54-3.5-6.41-11.7 1.54-13.58l85.79-25.61c8.85-2.53 17.69-2.92 26.54 0l84.24 25.3c9.16 2.22 10.97 10.71.31 14.19l-1.8.56zm-244.75 81.01-.81-30.4-49.97 14.43c-4.51.98-8.94 1.46-13.3 1.47-4.66.02-9.25-.49-13.77-1.47L79.74 92.55v30.84c.16 1.81.89 3.47 2.07 5.01-1.03 2.57-.45 5.92 2.16 10.28-.14 2.24-.1 4.46.23 6.62l2.66 1.51v2.67c-3.58-4.14-8.92-3.33-11.04 2.06-3.38 8.65 1.22 30.26 11.04 28.26 0 2.49.02 2.8.85 5.5 3.71 12.06 14 26.44 23.49 34.31 18.38 15.21 38.9 13.59 55.01 4.08 11.2-6.6 25.62-25.38 27.44-39.1.22-1.64.18-3.17.18-4.79.27.03.54.03.85-.02 13.01-1.9 15.25-33.68 3.87-32.88l3.56-2.23c.03-.46.04-.9.07-1.33 1.66-4.98 1.52-8.86-.06-11.9.32-.34.61-.68.83-1.03 1.27-2 2.07-4.44 2.37-7.3zM94.6 136.53c15.09 5.81 37.45 8 46.55 8.43 7.44.36 29.34-2.07 45.1-6.4 1.49 2.53 2.78 4.96 2.26 4.96v37.29c-.9 7.74-4.76 16.31-10.56 23.84-16.28 21.14-41.13 28.04-63.14 11.6-10.69-7.98-20.32-21.34-23.08-34.62v-40.8c.43-2.04 1.41-3.42 2.87-4.3zm130.97-65.71v37.15h1.18c.8 0 1.45.65 1.45 1.45v9.98c0 .8-.66 1.46-1.45 1.46h-1.18v3.5a3.24 3.24 0 0 1 2.63 3.17c0 1.77-1.45 3.22-3.23 3.22h-5.76a3.23 3.23 0 0 1-3.22-3.22 3.23 3.23 0 0 1 2.63-3.17v-3.5h-1.18c-.79 0-1.45-.65-1.45-1.46v-9.98c0-.8.65-1.45 1.45-1.45h1.18V72.98l-60.8 18.91c-11.02 2.62-22.03 2.8-33.04 0L57.67 71.86l-6.06-1.81c-7.56-3.09-5.68-10.34 1.36-12.01l75.9-22.67c7.83-2.23 15.66-2.58 23.48 0l74.55 22.39c8.09 1.98 9.7 9.48.27 12.56l-1.6.5zM180.51 225.6c5.77 5.19 11.94 8.39 18.28 10.49-9.39 10.29-17.24 25.71-22.72 49.18-.6 1.91-.93 3.94-.93 6.04H0c16.77-74.36 66.44-35.65 99.86-65.71 17.99 27.63 68.43 26.49 80.65 0zm-32.18-72.1c-.78 1.29-.56 2.65.66 3.33 2.44 1.37 5.55-.67 7.92-1.43 9.03-2.88 16.59-1.87 23.41 4.63-3.11-11.05-16.49-13.07-26.09-10.02-1.84.59-4.9 1.83-5.9 3.49zm-17.13.37c.53 1.17.24 2.35-.87 2.96-2.44 1.37-5.55-.67-7.91-1.43-9.03-2.88-16.6-1.87-23.42 4.63 3.14-11.01 16.36-13.06 25.98-10.05 1.98.62 5.35 1.96 6.22 3.89zm-24.69 9.56c-.28-.92.15-1.92.96-2.22 6.16-2.39 12.43-2.24 18.62 0 .8.3 1.25 1.28 1 2.19-.26.92-1.12 1.41-1.92 1.14-1.02-.36-2.05-.68-3.07-.91.11.37.15.75.15 1.17 0 2.37-1.91 4.31-4.31 4.31-2.38 0-4.31-1.94-4.31-4.31 0-.6.12-1.14.31-1.65-1.61.17-3.23.54-4.85 1.12-1.02.35-2.07.69-2.58-.84zm51.86-.01c-.13.41-.2.86-.2 1.34 0 2.36 1.94 4.3 4.3 4.3 2.38 0 4.32-1.94 4.32-4.3 0-.7-.16-1.33-.44-1.9 1.88.2 3.79.61 5.69 1.23.82.27 1.66-.27 1.89-1.21.23-.93-.25-1.89-1.05-2.17-3.1-1.02-6.2-1.53-9.3-1.5-3.09 0-6.17.52-9.2 1.53-.82.27-1.28 1.22-1.06 2.14.24.91 1.1 1.46 1.91 1.18.96-.3 1.94-.58 2.92-.78.38-.08.31-.14.22.14zm-24.24 27.68c-.02-.48.12-.99.46-1.39.72-.85 1.96-.96 2.81-.25 2.06 1.72 3.81 1.68 5.86-.02.85-.71 2.11-.58 2.81.27.7.84.58 2.1-.27 2.81-3.2 2.64-6.8 2.97-10.22.56-.74-.52-1.39-.98-1.45-1.98zm-6.59 13.01c-.42-1.72 1.42-3.22 3.02-2.36 6.38 3.38 12.56 3.54 18.94.03 2.44-1.31 4.41 2.32 2.03 3.67-7.15 3.95-14.63 4.06-21.95.5-.88-.42-1.77-.77-2.04-1.84zm-41.29-29.19v-18.64c-.87-3.66-2.45-4.73-4.25-5.07-4.81-.74-4.41 22.41 4.04 23.9.27.05.21.1.21-.19z" />
+                                </svg>
+                            </span>
+                            <div>
+                                <p class="text-darkBlue text-[28px] font-OpenSans font-[800]">
+                                    42
+                                </p>
+                                <p class="text-newGray text-[14px] font-OpenSans mt-[-3px] font-[500] uppercase  ">
+                                    Today’s Attendance
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="2xl:mt-0 mt-[15px] mx-[10px] 2xl:w-[23%] lg:w-[47%] md:w-[47%] sm:w-[46%] w-full">
+                        <div
+                            class="cursor-pointer parent-container main-over-view relative bg-white flex flex-row items-center h-[145px] rounded-[8px] px-[20px]">
+                            <span class="open-dropd-card cursor-pointer">
+                                <svg class=" fill-dimWhite hover:fill-darkBlue absolute right-[13px] top-[4px] w-[35px] "
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10ZM19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z">
+                                    </path>
+                                </svg>
+                            </span>
+                            <div class="my-custom-scroll my-drop-d p-[10px]">
+                                <p
+                                    class="close-noft-man text-darkBlue cursor-pointer w-full text-[13px] font-[600] hover:bg-ofWhites font-OpenSans">
+                                    View Details
+                                </p>
+                            </div>
+                            <span class="bg-ofWhite py-[15px] px-[15px] rounded-[8px] mr-[20px]">
+                                <svg class="fill-mediumGreen w-[35px] h-[35px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM7 17C7 14.2386 9.23858 12 12 12C14.7614 12 17 14.2386 17 17H15C15 15.3431 13.6569 14 12 14C10.3431 14 9 15.3431 9 17H7ZM8 11C7.17157 11 6.5 10.3284 6.5 9.5C6.5 8.67157 7.17157 8 8 8C8.82843 8 9.5 8.67157 9.5 9.5C9.5 10.3284 8.82843 11 8 11ZM16 11C15.1716 11 14.5 10.3284 14.5 9.5C14.5 8.67157 15.1716 8 16 8C16.8284 8 17.5 8.67157 17.5 9.5C17.5 10.3284 16.8284 11 16 11Z"></path></svg>
+                            </span>
+                            <div>
+                                <p class="text-darkBlue text-[28px] font-OpenSans font-[800]">
+                                    02
+                                </p>
+                                <p class="text-newGray text-[14px] font-OpenSans mt-[-3px] font-[500] uppercase  ">
+                                    Girls Attendance
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="2xl:mt-0 mt-[15px] mx-[10px] 2xl:w-[23%] lg:w-[47%] md:w-[47%] sm:w-[46%] w-full">
+                        <div
+                            class="cursor-pointer parent-container main-over-view relative bg-white flex flex-row items-center h-[145px] rounded-[8px] px-[20px]">
+                            <span class="open-dropd-card cursor-pointer">
+                                <svg class=" fill-dimWhite hover:fill-darkBlue absolute right-[13px] top-[4px] w-[35px] "
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10ZM19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z">
+                                    </path>
+                                </svg>
+                            </span>
+                            <div class="my-custom-scroll my-drop-d p-[10px]">
+                                <p
+                                    class="close-noft-man text-darkBlue cursor-pointer w-full text-[13px] font-[600] hover:bg-ofWhites font-OpenSans">
+                                    View Details
+                                </p>
+                            </div>
+                            <span class="bg-ofWhite py-[15px] px-[15px] rounded-[8px] mr-[20px]">
+                                <svg class="fill-mediumGreen w-[35px] h-[35px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM13 12H17V14H11V7H13V12Z"></path></svg>
+                                <!-- <svg class="fill-mediumGreen w-[35px] h-[35px]" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M4 11.3333L0 9L12 2L24 9V17.5H22V10.1667L20 11.3333V18.0113L19.7774 18.2864C17.9457 20.5499 15.1418 22 12 22C8.85817 22 6.05429 20.5499 4.22263 18.2864L4 18.0113V11.3333ZM6 12.5V17.2917C7.46721 18.954 9.61112 20 12 20C14.3889 20 16.5328 18.954 18 17.2917V12.5L12 16L6 12.5ZM3.96927 9L12 13.6846L20.0307 9L12 4.31541L3.96927 9Z">
+                                    </path>
+                                </svg> -->
+                            </span>
+                            <div>
+                                <p class="text-darkBlue text-[28px] font-OpenSans font-[800]">
+                                    05
+                                </p>
+                                <p class="text-newGray text-[14px] font-OpenSans mt-[-3px] font-[500] uppercase  ">
+                                    Boys Attendance
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!--  -->
+            <div class="2xl:px-[15px] max-w-[1440px] w-full mx-auto mt-[50px]">
+                <div class="flex flex-row justify-between md:flex-row flex-col 2xl:mx-0 mx-[15px]">
+                    <div class="2xl:w-[66%] lg:w-[59%] md:w-[49%]">
+                        <div class="parent-container bg-white w-full h-full relative rounded-[8px] px-[25px] py-[25px]">
+                            <span class="open-dropd-card cursor-pointer">
+                                <svg class="fill-lgtGray absolute right-[13px] top-[8px] w-[35px]"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10ZM19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z">
+                                    </path>
+                                </svg>
+                            </span>
+                            <div class="my-custom-scroll my-drop-d p-[10px]">
+                                <p
+                                    class="close-noft-man text-darkBlue cursor-pointer w-full text-[13px] font-[600] hover:bg-ofWhites font-OpenSans">
+                                    View Details
+                                </p>
+                            </div>
+
+                            <p class="text-darkBlue font-OpenSans lg:text-[20px] md:text-[17px]  font-[600] ">
+                                Attendance Overview
+                            </p>
+                            <div class="w-full h-full mt-[20px]">
+                                <canvas class="" id="myChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="2xl:w-[32.5%]  lg:w-[39%] md:w-[49%] md:mt-0 mt-[20px]">
+                        <div class="parent-container bg-white w-full h-full relative rounded-[8px] px-[25px] py-[25px]">
+                            <span class="open-dropd-card cursor-pointer">
+                                <svg class="fill-lgtGray absolute right-[13px] top-[8px] w-[35px]"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10ZM19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z">
+                                    </path>
+                                </svg>
+                            </span>
+                            <div class="my-custom-scroll my-drop-d p-[10px]">
+                                <p
+                                    class="close-noft-man text-darkBlue cursor-pointer w-full text-[13px] font-[600] hover:bg-ofWhites font-OpenSans">
+                                    View Details
+                                </p>
+                            </div>
+                            <p class="text-darkBlue font-OpenSans lg:text-[20px] md:text-[17px]  font-[600] ">
+                                Attendance by Class
+                            </p>
+                            <div class="w-full h-full mt-[20px]">
+                                <canvas class="barCanva" id="mybarChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--  -->
+            <div class="2xl:px-[15px] max-w-[1440px] w-full mx-auto mt-[50px] pb-[50px]">
+                <div class="flex flex-row 2xl:flex-nowrap flex-wrap justify-between 2xl:mx-[-10px]">
+                    <div class="2xl:mt-0 mt-[15px] 2xl:w-[33%] lg:w-[48%] md:w-[47%] w-[100%] mx-[10px]">
+                        <div class="parent-container bg-white w-full h-full relative rounded-[8px] px-[25px] py-[25px]">
+                            <span class="open-dropd-card cursor-pointer">
+                                <svg class="fill-lgtGray absolute right-[13px] top-[8px] w-[35px]"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10ZM19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z">
+                                    </path>
+                                </svg>
+                            </span>
+                            <div class="my-custom-scroll my-drop-d p-[10px]">
+                                <p
+                                    class="close-noft-man text-darkBlue cursor-pointer w-full text-[13px] font-[600] hover:bg-ofWhites font-OpenSans">
+                                    View Details
+                                </p>
+                            </div>
+                            <p class="text-darkBlue font-OpenSans lg:text-[20px] md:text-[17px]  font-[600] ">
+                                Absence by Gender
+                            </p>
+                            <div class="flex flex-row mt-[20px]">
+                                <div class=" w-[50%] flex flex-row items-center">
+                                    <div class="relative" id="glassContainer">
+                                        <img class="w-[100px]" id="glassImage" src="./assets/images/grey-woman-hi.png"
+                                            alt="grey-woman-hi">
+                                        <img id="topImageW" class="absolute bottom-0 w-[100px]"
+                                            src="./assets/images/orange-woman-hi.png" alt="">
+                                        <div id="waterLevel" class="waterLevel"></div>
+                                    </div>
+                                    <div class="ml-[10px] lg:max-w-[120px] max-w-[85px]">
+                                        <p class="font-OpenSans md:text-[35px] text-[28px] text-[#FF7F00] font-[600]">
+                                            65%
+                                        </p>
+                                        <p
+                                            class="font-OpenSans  md:text-[14px] text-[12px] text-darkBlue font-[400] leading-[17px]">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi velit
+                                            ullam
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class=" w-[50%] flex flex-row items-center">
+                                    <div class="relative" id="glassContainer">
+                                        <img class="w-[100px] relative z-[2]" id="topImage"
+                                            src="./assets/images/blue-man-standing-hi.png" alt="grey-woman-hi">
+                                        <img class="absolute bottom-0 w-[100px]" src="./assets/images/man-hi.png"
+                                            alt="">
+                                    </div>
+                                    <div class="ml-[10px] lg:max-w-[120px] max-w-[85px]">
+                                        <p class="font-OpenSans md:text-[35px] text-[28px] text-[#7FBCF9] font-[600]">
+                                            35%
+                                        </p>
+                                        <p
+                                            class="font-OpenSans  md:text-[14px] text-[12px] text-darkBlue font-[400] leading-[17px]">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi velit
+                                            ullam
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="absences-item md:absolute relative md:mt-0 mt-[35px] flex justify-center pt-[15px] w-[93%] border-t-[.5px] border-ofWhite">
+                                <div class="flex flex-row items-center">
+                                    <span class="w-[25px] h-[12px] bg-[#7FBCF9] rounded-full mr-[10px]"></span>
+                                    <p class="text-dimWhite font-[500] text-[15px] font-OpenSans">
+                                        Boys <span class="text-darkBlue font-[700]">
+                                            25
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="flex flex-row items-center ml-[50px]">
+                                    <span class="w-[25px] h-[12px] bg-[#FF7F00] rounded-full mr-[10px]"></span>
+                                    <p class="text-dimWhite font-[500] text-[15px] font-OpenSans">
+                                        Girls <span class="text-darkBlue font-[700]">
+                                            22
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="2xl:mt-0 mt-[15px] 2xl:w-[33%] lg:w-[48%] md:w-[47%] w-[100%] mx-[10px]">
+                        <div class="parent-container bg-white w-full h-full relative rounded-[8px] px-[25px] py-[25px]">
+                            <span class="open-dropd-card cursor-pointer">
+                                <svg class="fill-lgtGray absolute right-[13px] top-[8px] w-[35px]"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10ZM19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z">
+                                    </path>
+                                </svg>
+                            </span>
+                            <div class="my-custom-scroll my-drop-d p-[10px]">
+                                <p
+                                    class="close-noft-man text-darkBlue cursor-pointer w-full text-[13px] font-[600] hover:bg-ofWhites font-OpenSans">
+                                    View Details
+                                </p>
+                            </div>
+                            <p class="text-darkBlue font-OpenSans lg:text-[20px] md:text-[17px]  font-[600] ">
+                                Top 6 Absentees by Class
+                            </p>
+                            <div class="mt-[15px]">
+                                <div
+                                    class="h-[55px] border-b-[1px] border-[#d3d3d32b] flex flex-row justify-between items-center">
+                                    <div class="flex flex-row items-center">
+                                        <div class="w-[30px] h-[30px] mr-[8px]">
+                                            <img class="w-full h-full object-cover rounded-full"
+                                                src="./assets/images/istockphoto-1399611777-170667a.jpg" alt="profile">
+                                        </div>
+                                        <p class="text-darkBlue font-OpenSans md:text-[15px] text-[15px] font-[600]">
+                                            Brokley simsoms <span
+                                                class="rounded-full px-[12px] py-[4px] text-[12px] bg-ofWhite">100%</span>
+                                        </p>
+                                    </div>
+                                    <div class="">
+                                        <p class="text-[15px] font-OpenSans text-darkBlue font-[500]">
+                                            30 <span class="text-dimWhite font-[400]">days</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div
+                                    class="h-[55px] border-b-[1px] border-[#d3d3d32b] flex flex-row justify-between items-center">
+                                    <div class="flex flex-row items-center">
+                                        <div class="w-[30px] h-[30px] mr-[8px]">
+                                            <img class="w-full h-full object-cover rounded-full"
+                                                src="./assets/images/imag12es.png" alt="profile">
+                                        </div>
+                                        <p class="text-darkBlue font-OpenSans md:text-[15px] text-[15px] font-[600]">
+                                            Coody Fisher <span
+                                                class="rounded-full px-[12px] py-[4px] text-[12px] bg-ofWhite">80%</span>
+                                        </p>
+                                    </div>
+                                    <div class="">
+                                        <p class="text-[15px] font-OpenSans text-darkBlue font-[500]">
+                                            30 <span class="text-dimWhite font-[400]">days</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div
+                                    class="h-[55px] border-b-[1px] border-[#d3d3d32b] flex flex-row justify-between items-center">
+                                    <div class="flex flex-row items-center">
+                                        <div class="w-[30px] h-[30px] mr-[8px]">
+                                            <img class="w-full h-full object-cover rounded-full"
+                                                src="./assets/images/download.png" alt="profile">
+                                        </div>
+                                        <p class="text-darkBlue font-OpenSans md:text-[15px] text-[15px] font-[600]">
+                                            Brokley simsoms <span
+                                                class="rounded-full px-[12px] py-[4px] text-[12px] bg-ofWhite">100%</span>
+                                        </p>
+                                    </div>
+                                    <div class="">
+                                        <p class="text-[15px] font-OpenSans text-darkBlue font-[500]">
+                                            30 <span class="text-dimWhite font-[400]">days</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div
+                                    class="h-[55px] border-b-[1px] border-[#d3d3d32b] flex flex-row justify-between items-center">
+                                    <div class="flex flex-row items-center">
+                                        <div class="w-[30px] h-[30px] mr-[8px]">
+                                            <img class="w-full h-full object-cover rounded-full"
+                                                src="./assets/images/images.png" alt="profile">
+                                        </div>
+                                        <p class="text-darkBlue font-OpenSans md:text-[15px] text-[15px] font-[600]">
+                                            Walter White <span
+                                                class="rounded-full px-[12px] py-[4px] text-[12px] bg-ofWhite">20.8%</span>
+                                        </p>
+                                    </div>
+                                    <div class="">
+                                        <p class="text-[15px] font-OpenSans text-darkBlue font-[500]">
+                                            30 <span class="text-dimWhite font-[400]">days</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div
+                                    class="h-[55px] border-b-[1px] border-[#d3d3d32b] flex flex-row justify-between items-center">
+                                    <div class="flex flex-row items-center">
+                                        <div class="w-[30px] h-[30px] mr-[8px]">
+                                            <img class="w-full h-full object-cover rounded-full"
+                                                src="./assets/images/dasfimages.png" alt="profile">
+                                        </div>
+                                        <p class="text-darkBlue font-OpenSans md:text-[15px] text-[15px] font-[600]">
+                                            Micky Author <span
+                                                class="rounded-full px-[12px] py-[4px] text-[12px] bg-ofWhite">50.6%</span>
+                                        </p>
+                                    </div>
+                                    <div class="">
+                                        <p class="text-[15px] font-OpenSans text-darkBlue font-[500]">
+                                            30 <span class="text-dimWhite font-[400]">days</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="h-[55px]  flex flex-row justify-between items-center">
+                                    <div class="flex flex-row items-center">
+                                        <div class="w-[30px] h-[30px] mr-[8px]">
+                                            <img class="w-full h-full object-cover rounded-full"
+                                                src="./assets/images/istockphoto-465113506-612x612.jpg" alt="profile">
+                                        </div>
+                                        <p class="text-darkBlue font-OpenSans md:text-[15px] text-[15px] font-[600]">
+                                            Savannah Nguyen <span
+                                                class="rounded-full px-[12px] py-[4px] text-[12px] bg-ofWhite">100%</span>
+                                        </p>
+                                    </div>
+                                    <div class="">
+                                        <p class="text-[15px] font-OpenSans text-darkBlue font-[500]">
+                                            30 <span class="text-dimWhite font-[400]">days</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="2xl:mt-0 mt-[15px] 2xl:w-[33%] lg:w-[48%] md:w-[47%] w-[100%] mx-[10px]">
+                        <div class="parent-container bg-white w-full h-full relative rounded-[8px] px-[25px] py-[25px]">
+                            <span class="open-dropd-card cursor-pointer">
+                                <svg class="fill-lgtGray absolute right-[13px] top-[8px] w-[35px]"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10ZM19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z">
+                                    </path>
+                                </svg>
+                            </span>
+                            <div class="my-custom-scroll my-drop-d p-[10px]">
+                                <p
+                                    class="close-noft-man text-darkBlue cursor-pointer w-full text-[13px] font-[600] hover:bg-ofWhites font-OpenSans">
+                                    View Details
+                                </p>
+                            </div>
+                            <p class="text-darkBlue font-OpenSans lg:text-[20px] md:text-[17px]  font-[600] ">
+                                Weekly Absent
+                            </p>
+                            <div class="mt-12">
+                                <canvas class="barCanva" id="mydonutChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- main js -->
+    <script src="./main.js"></script>
+</body>
+
+</html>

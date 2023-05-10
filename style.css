@@ -1,0 +1,209 @@
+.nav.active {}
+
+/* width */
+.my-custom-scroll::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+.my-custom-scroll::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+/* Handle */
+.my-custom-scroll::-webkit-scrollbar-thumb {
+    background: #111A26;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+.my-custom-scroll::-webkit-scrollbar-thumb:hover {
+    background: #111A26;
+}
+
+
+.profile-pro,
+.for-toggle-notification {
+    opacity: 0;
+    transition: all .2s ease-in-out;
+    visibility: hidden;
+}
+
+.isactive-notific {
+    opacity: 1;
+    transition: all .2s ease-in-out;
+    visibility: visible;
+}
+
+.nagvi-active.active p {
+    color: #71D99E
+}
+
+.nagvi-active.active::before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 4px;
+    background-color: #71D99E;
+    bottom: -24px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.side-menu-bar .active::before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 4px;
+    background-color: #71D99E;
+    bottom: -2px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.side-menu-bar.open-side-menu-bar::before {
+    content: "";
+    position: absolute;
+    width: 100vw;
+    height: 100%;
+    background-color: #0000003b;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -92;
+}
+
+.my-close-btn {
+    opacity: 0;
+    transition: all .3s ease-in-out;
+    visibility: hidden;
+}
+
+.show-my-close-btn {
+    opacity: 1;
+    transition: all .3s ease-in-out;
+    visibility: visible;
+}
+
+.my-drop-d {
+    opacity: 0;
+    transition: all .3s ease-in-out;
+    visibility: hidden;
+    position: absolute;
+    top: 34px;
+    right: 20px;
+    box-shadow: 0px 0px 18px -11px black;
+    width: 100px;
+    height: 40px;
+    /* overflow: scroll; */
+    border-radius: 8px;
+}
+
+.main-over-view.main-over-view-show .show-my-drop-d {
+    opacity: 1 !important;
+    transition: all .3s ease-in-out !important;
+    visibility: visible !important;
+    background-color: #111a26;
+}
+.show-my-drop-d {
+    opacity: 1 !important;
+    transition: all .3s ease-in-out !important;
+    visibility: visible !important;
+}
+
+
+/*  */
+.my-new-class,
+.my-new-classes {
+    opacity: 0;
+    transition: all .3s ease-in-out;
+    visibility: hidden;
+    box-shadow: 0px 0px 24px -14px black;
+}
+
+.open-my-new-classes {
+    opacity: 1;
+    transition: all .3s ease-in-out;
+    visibility: visible;
+}
+
+/* sidebar */
+.side-menu-bar {
+    position: absolute;
+    left: -315px;
+    top: 0;
+    bottom: 0;
+    height: 100vh;
+    z-index: 9;
+    padding: 35px 20px;
+    transition: all .4s ease-in-out;
+}
+
+.open-side-menu-bar {
+    left: 0px;
+}
+.absences-item {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    bottom: 15px;
+}
+canvas {
+    height: 165px !important;
+}
+
+#mydonutChart {
+    height: 300px !important;
+}
+
+.main-over-view.main-over-view-show {
+    background-color: #71D99E;
+}
+.main-over-view.main-over-view-show .open-dropd-card svg {
+    fill: #fff !important;
+}
+.main-over-view.main-over-view-show div p {
+    color: #fff;
+}
+/* #topImage {
+    clip-path: polygon(0 0, 100% 0, 100% 42%, 1% 42%);
+} */
+
+.my-bg-wht::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    height: 96%;
+    background-color: #F2F3F7;
+    width: 100vw;
+}
+
+@media only screen and (min-width: 425px) {
+    canvas {
+        height: 340px !important;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    canvas {
+        height: 400px !important;
+    }
+
+    .barCanva {
+        height: 400px !important;
+        /* Set the desired height */
+        /* Set the desired width */
+    }
+
+    #mydonutChart {
+        width: 300px !important;
+        height: 300px !important;
+        margin: auto;
+    }
+
+    .my-bg-wht::before {
+        height: 92%;
+    }
+}
