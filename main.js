@@ -214,3 +214,15 @@ $(document).on('click', function (e) { if (!(($(e.target).closest(".isactive-not
 $(document).on('click', function (e) { if (!(($(e.target).closest(".open-my-new-classes").length > 0) || ($(e.target).closest(".class-selected-d").length > 0))) { $(".my-new-classes").removeClass('open-my-new-classes'); } });
 $(document).on('click', function (e) { if (!(($(e.target).closest(".open-my-new-classes").length > 0) || ($(e.target).closest(".my-dd-p").length > 0))) { $(".my-new-class").removeClass('open-my-new-classes'); } });
 $(document).on('click', function (e) { if (!(($(e.target).closest(".show-my-drop-d").length > 0) || ($(e.target).closest(".open-dropd-card").length > 0))) { $(".my-drop-d").removeClass('show-my-drop-d'); } });
+
+// selector for class
+function selectedOption(option) {
+  var selectedOption = document.getElementById('classesSelector');
+  selectedOption.innerText = option;
+}
+
+// selector for days
+function onSelectedDays(option) {
+  var selectedOption = document.getElementById('isSelectedDay');
+  selectedOption.innerText = option;
+}
