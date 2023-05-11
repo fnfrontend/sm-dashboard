@@ -185,16 +185,17 @@ $('.close-classes-bss').on('click', function () {
 
 // update clip path
 // value for boys
-const updatedValue = 80;
-updatedValue - 100;
-const polygonInital = `polygon(0 ${updatedValue}%, 100% ${updatedValue}%, 100% 100%, 1% 100%)`;
+const updatedValue = 20;
+let mynewvari = Math.abs(updatedValue - 100);
+const polygonInital = `polygon(0 ${mynewvari}%, 100% ${mynewvari}%, 100% 100%, 1% 100%)`;
 $('#topImage').css('clip-path', polygonInital);
 
 // value for girls
-const updatedValueW = 20;
-updatedValueW - 100;
-const polygonInitalW = `polygon(0 ${updatedValueW}%, 100% ${updatedValueW}%, 100% 100%, 1% 100%)`;
+const updatedValueW = 80;
+let myvari = Math.abs(updatedValueW - 100);
+const polygonInitalW = `polygon(0 ${myvari}%, 100% ${myvari}%, 100% 100%, 1% 100%)`;
 $('#topImageW').css('clip-path', polygonInitalW);
+
 
 
 // select overview box
