@@ -184,13 +184,15 @@ $('.close-classes-bss').on('click', function () {
 
 
 // update clip path
-// value for men
-const updatedValue = 65;
+// value for boys
+const updatedValue = 80;
+updatedValue - 100;
 const polygonInital = `polygon(0 ${updatedValue}%, 100% ${updatedValue}%, 100% 100%, 1% 100%)`;
 $('#topImage').css('clip-path', polygonInital);
 
-// value for Women
-const updatedValueW = 35;
+// value for girls
+const updatedValueW = 20;
+updatedValueW - 100;
 const polygonInitalW = `polygon(0 ${updatedValueW}%, 100% ${updatedValueW}%, 100% 100%, 1% 100%)`;
 $('#topImageW').css('clip-path', polygonInitalW);
 
