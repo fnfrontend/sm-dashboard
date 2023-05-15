@@ -48,7 +48,8 @@ var config = {
       legend: {
         display: false // Set display to false to remove the legends
       }
-    }
+    },
+    
   }
 };
 
