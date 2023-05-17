@@ -1,5 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;800&display=swap');
+/* fonts */
+@font-face {
+    font-family: 'Inter';
+    src: url('./assets/fonts/static/Inter-Light.ttf');
+}
+@font-face {
+    font-family: 'Inter-bold';
+    src: url('./assets/fonts/static/Inter-Bold.ttf');
+}
 
+/* colors */
 :root {
     --darkBlue: #111A26;
     --darkGreen: #36D97D;
@@ -368,6 +377,9 @@ p {
     right: 20px;
     top: 20px;
     z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .navigation-container .side-menu-bar .my-close-btn svg {
@@ -647,6 +659,7 @@ p {
     right: 13px;
     top: 8px;
     width: 35px;
+    cursor: pointer;
 }
 
 .overall-card-container .card-icon svg {
@@ -691,8 +704,8 @@ p {
 .cdpssd {
     color: var(--darkBlue);
     font-size: 28px;
-    font-family: 'Inter';
-    font-weight: 800;
+    font-family: 'Inter-bold';
+    margin-bottom: 5px;
 }
 
 .mscdpd {
@@ -949,7 +962,7 @@ p {
     font-size: 15px;
     font-family: 'Inter';
     color: var(--darkBlue);
-    font-weight: 500;
+    font-weight: bold;
 }
 
 .pioou-moy-ykt span {
@@ -1034,7 +1047,7 @@ p {
     top: 34px;
     right: 20px;
     box-shadow: 0px 0px 18px -11px black;
-    width: 87px;
+    width: 80px;
     height: 18px;
     /* overflow: scroll; */
     border-radius: 8px;
@@ -1268,7 +1281,7 @@ canvas {
         height: 90%;
     }
     .ne-chart-pc {
-        margin-top: 30px;
+        margin-top: 50px;
     }
 }
 
@@ -1399,6 +1412,6 @@ canvas {
         width: 33%;
     }
     .parent-container {
-        height: 88%;
+        height: 91%;
     } 
 }
